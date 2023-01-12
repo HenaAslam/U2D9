@@ -481,7 +481,7 @@
 
     <div class="container mt-5">
       <h2>Tracklist of <em>"It's About Us"</em></h2>
-      <table class="table table-striped table-danger delrowtable">
+      <table class="table table-striped table-danger " id="delrowtable">
         <thead>
           <tr>
             <th scope="col">Order Number</th>
@@ -492,12 +492,12 @@
           </tr>
         </thead>
         <tbody>
-          <tr class="table-info">
+          <tr >
             <th scope="row">1</th>
             <td>Little Do You Know</td>
             <td>Alex & Sierra</td>
             <td>3:05</td>
-            <td class="d-flex justify-content-start"><button type="button" class="btn btn-outline-danger btn-sm">Delete</button></td>
+            <td class="d-flex justify-content-start"><button id="del" type="button" class="btn btn-outline-danger btn-sm">Delete</button></td>
           </tr>
           
           <tr>
@@ -505,29 +505,29 @@
             <td>Almost Home</td>
             <td>Alex & Sierra</td>
             <td>3:23</td>
-            <td class="d-flex justify-content-start"><button type="button" class="btn btn-outline-danger btn-sm">Delete</button></td>
+            <td class="d-flex justify-content-start"><button id="del" type="button" class="btn btn-outline-danger btn-sm">Delete</button></td>
           </tr>
        
-          <tr class="table-info">
+          <tr >
             <th scope="row">3</th>
             <td>Back to You</td>
             <td>Alex & Sierra</td>
             <td>3:52</td>
-            <td class="d-flex justify-content-start"><button type="button" class="btn btn-outline-danger btn-sm">Delete</button></td>
+            <td class="d-flex justify-content-start"><button id="del" type="button" class="btn btn-outline-danger btn-sm">Delete</button></td>
           </tr>
           <tr>
             <th scope="row">4</th>
             <td>Almost Home</td>
             <td>Alex & Sierra</td>
             <td>3:23</td>
-            <td class="d-flex justify-content-start"><button type="button" class="btn btn-outline-danger btn-sm">Delete</button></td>
+            <td class="d-flex justify-content-start"><button id="del" type="button" class="btn btn-outline-danger btn-sm">Delete</button></td>
           </tr>
-          <tr class="table-info">
+          <tr>
             <th scope="row">5</th>
             <td>Back to You</td>
             <td>Alex & Sierra</td>
             <td>3:52</td>
-            <td class="d-flex justify-content-start"><button type="button" class="btn btn-outline-danger btn-sm ">Delete</button></td>
+            <td class="d-flex justify-content-start"><button id="del" type="button" class="btn btn-outline-danger btn-sm ">Delete</button></td>
           </tr>
         </tbody>
       </table>
@@ -550,7 +550,7 @@
       <div class="modal-body">
         <div class="row">
         <div class="col-6"><label for="num">Track number:</label>
-        <input type="text" placeholder="Track number"  id="num">
+        <input type="number" placeholder="Track number"  id="num">
       </div>
 
         <div class="col-6">
@@ -612,64 +612,81 @@
     toggle();
 
 
+  
+    //     
+    //   }
+    // }
+    // 
     function deleteRow(){
-      let delbtnNodes=document.querySelectorAll('.delrowtable .btn-sm')
-      //console.log(delbtnNodes)
-      let rowNodes=document.querySelectorAll('.delrowtable tr')
-      //console.log(rowNodes)
-      let tableNode=document.querySelector('.delrowtable')
-      //console.log(tableNode)
-    
+      let delbtnNodes=document.querySelectorAll('#delrowtable .btn-sm')
+      let rowNodes=document.querySelectorAll('#delrowtable tr')
+      let tableNode=document.querySelector('#delrowtable')
       for(i=0;i<delbtnNodes.length;i++){
         let rowtodelete=rowNodes[i+1]
         let delbtnNode=delbtnNodes[i]
-        //console.log(delbtnNode)
         delbtnNode.addEventListener("click",function(){
-          //alert('hello')
-         //tableNode.removeChild(rowtodelete)
-          rowtodelete.remove();
+          // rowtodelete.remove()
+          delbtnNode.closest('tr').remove();
         })
-      }
     }
-    deleteRow();
+  }
 
+    deleteRow();
+    
     function addTrack(){
       let addbtn=document.querySelector('#addtotable')
-      let tableNode=document.querySelector('.delrowtable')
+      let tableNode=document.querySelector('#delrowtable')
       addbtn.addEventListener("click",function(){
-        let num=document.querySelector('#num').value;
-        //console.log(num)
-        let titlename=document.querySelector('#title').value;
-        //console.log(titlename)
-        let artistname=document.querySelector('#artist').value;
-        //console.log(artistname)
-        let durationnode=document.querySelector('#dur').value;
-       // console.log(durationnode)
-        let row=document.createElement('tr')
-        //row.classList.add('table-info')
-        let col1=document.createElement('th')
-        col1.setAttribute("scope", "row");
-        col1.innerText=num;
-        row.appendChild(col1)
-        let col2=document.querySelector('td')
-        col2.innerText=titlename
-        row.appendChild(col2)
-        let col3=document.querySelector('td')
-        col3.innerText=artistname
-        row.appendChild(col3)
-        let col4=document.querySelector('td')
-        col4.innerText=durationnode
-        row.appendChild(col4)
-        let col5=document.querySelector('td')
-        col5.innerText=""
-        row.appendChild(col5)
-        tableNode.appendChild(row)
-        alert(`${titlename} is added to the list`)
+      let num=document.querySelector('#num').value;
+      let titlename=document.querySelector('#title').value;
+      let artistname=document.querySelector('#artist').value;
+      let durationnode=document.querySelector('#dur').value;
+      let btnn=document.createElement('button')
+      btnn.setAttribute("type","button")
+      btnn.classList.add('btn')
+      btnn.classList.add('btn-outline-danger')
+      btnn.classList.add('btn-sm')
+      btnn.innerText="Delete"
+      btnn.addEventListener("click",function(){
+          btnn.closest('tr').remove();
+       })
+      let row=document.createElement('tr')
+      let col1=document.createElement('th')
+      col1.setAttribute("scope", "row");
+      col1.innerText=num;
+      row.appendChild(col1)
+      let col2=document.createElement('td')
+      col2.innerText=titlename
+      row.appendChild(col2)
+      let col3=document.createElement('td')
+      col3.innerText=artistname
+      row.appendChild(col3)
+      let col4=document.createElement('td')
+      col4.innerText=durationnode
+      row.appendChild(col4)
+      let col5=document.createElement('td')
+      col5.appendChild(btnn)
+      row.appendChild(col5)
+      tableNode.appendChild(row)
+      document.querySelector('#num').value=""
+      document.querySelector('#title').value=""
+       document.querySelector('#artist').value=""
+       document.querySelector('#dur').value=""
 
-      })
+      //  let alert=document.createElement('div')
+      //  alert.classList.add('alert')
+      //  alert.classList.add('alert-danger')
+      //  alert.setAttribute("role", "alert")
+      // alert.innerText=`${titlename} is added to the list`
+     
+         
+       alert(`${titlename} is added to the list`)
+
+        
+     })
 
     }
-    addTrack()
+     addTrack();
 
 
     // function opacityOfButtons(){

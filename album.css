@@ -66,7 +66,7 @@ body{
     border-radius: 35px;
 }
 .card{
-    background-color: #8B008B;
+    /* background-color: #8B008B; */
     transition: transform 300ms;
 }
 nav a ion-icon{
@@ -100,12 +100,45 @@ nav a ion-icon{
         opacity:1
     }
 }
+@keyframes fadeout{
+    0%{
+        opacity:1;
+    }
+    25%{
+        opacity:75
+    }
+    50%{
+        opacity:.5
+    }
+    75%{
+        opacity:.25
+    }
+    100%{
+        opacity:0
+    }
+}
+#del{
+    
+    opacity: 0;
+}
+tr:hover #del {
+        animation:fadein 1s forwards;
+       
+        /* opacity: 1;
+        transition: 0.8s; */
+} 
 #demo{
     animation: fadein 1.3s;
 
 }
 .badge-img-wrapper{
     position:relative;
+}
+.info-container{
+    position:absolute;
+    z-index: 2;
+    transform: translateY(301px);
+    opacity:0;
 }
 .genre{
     position:absolute;
@@ -168,3 +201,11 @@ input{
 .noopacityclass{
     opacity:0
 } */
+
+
+.delrowtable tr:nth-of-type(2n){
+    background-color: #ed969e
+}
+.delrowtable tr:nth-of-type(2n+1){
+    background-color: #e9bcc1
+}
